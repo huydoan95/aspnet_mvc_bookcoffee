@@ -1,0 +1,61 @@
+﻿@model Models.EF.Category
+
+@{
+    ViewBag.Title = "CategoryDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+
+@section header{
+<h1>Chi tiết loại tin </h1>   
+}
+<div class="col-md-12">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h4>@Html.DisplayNameFor(model => model.Name) :@Html.DisplayFor(model => model.Name)</h4>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.MetaTitle)</th>
+                            <th>@Html.DisplayNameFor(model => model.ParentID)</th>
+                            <th>@Html.DisplayNameFor(model => model.DisplayOrder)</th>
+                            <th>@Html.DisplayNameFor(model => model.SeoTitle)</th>
+                            <th>@Html.DisplayNameFor(model => model.CreatedDate)</th>
+                            <th>@Html.DisplayNameFor(model => model.CreatedBy)</th>
+                            <th>@Html.DisplayNameFor(model => model.ModifiedDate)</th>
+                            <th>@Html.DisplayNameFor(model => model.ModifiedBy)</th>
+                            <th>@Html.DisplayNameFor(model => model.MetaKeywords)</th>
+                            <th>@Html.DisplayNameFor(model => model.MetaDescriptions)</th>
+                            <th>@Html.DisplayNameFor(model => model.Status)</th>
+                            <th>@Html.DisplayNameFor(model => model.ShowOnHome)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Html.DisplayFor(model => model.MetaTitle)</td>
+                            <td>@Html.DisplayFor(model => model.ParentID)</td>
+                            <td>@Html.DisplayFor(model => model.DisplayOrder)</td>
+                            <td>@Html.DisplayFor(model => model.SeoTitle)</td>
+                            <td>@Html.DisplayFor(model => model.CreatedDate)</td>
+                            <td>@Html.DisplayFor(model => model.CreatedBy)</td>
+                            <td>@Html.DisplayFor(model => model.ModifiedDate)</td>
+                            <td>@Html.DisplayFor(model => model.ModifiedBy)</td>
+                            <td>@Html.DisplayFor(model => model.MetaKeywords)</td>
+                            <td>@Html.DisplayFor(model => model.MetaDescriptions)</td>
+                            <td>@Html.DisplayFor(model => model.Status)</td>
+                            <td>@Html.DisplayFor(model => model.ShowOnHome)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+        <!--/. panel-body-->
+        <div class="panel-footer">
+            <div class="btn btn-outline btn-success">@Html.ActionLink("Quay lại", "Index", null, null)</div>
+            <div class="btn btn-outline btn-success">@Html.ActionLink("Cập nhật", "UpdateCategory", "Category", new { id = Model.ID }, null)</div>      
+        </div>
+    </div>
+</div>

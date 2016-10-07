@@ -1,0 +1,94 @@
+﻿@model PagedList.IPagedList<Models.EF.Category>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+
+@section header{
+    Danh sách các loại tin tức
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                @Html.ActionLink("Tạo mới", "CreateCategory", "Category")
+
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                @using (Html.BeginForm("Index", "Category", FormMethod.Get))
+                {
+                    <div class="row">
+                        <div class="col-md-2">
+                            <input type="text" name="searchString" value="@ViewBag.SearchString" />
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit">Tìm kiếm</button>
+                        </div>
+                    </div>
+                }
+                <div class="table-responsive">
+                    @*<table class="table table-striped table-bordered table-hover">*@
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+
+                                <th>STT</th>
+                                <th>Loại tin tức</th>
+                                <th>Ngày tạo </th>
+                                <th>Người tạo</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int No = 1;
+                                foreach (var item in Model)
+                                {
+                                    <tr id="row_@item.ID">
+                                        <td>@No</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.CreatedDate</td>
+                                        <td>@item.CreatedBy</td>
+                                        <td>
+                                            <a href="/Admin/Category/CategoryDetail/@item.ID">Chi tiết</a>
+                                            |
+                                            <a href="/Admin/Category/UpdateCategory/@item.ID">Sửa</a>
+                                            |
+                                            @*<a href="/Admin/User/delete/@item.ID">Xóa</a>*@
+                                            @Ajax.ActionLink("Xóa", "DeleteCategory", new { @id = item.ID }, new AjaxOptions
+                                               {
+                                                   //Hiện thông báo confirm trước khi xóa
+                                                   Confirm = "Bạn có thực sự muốn xóa loại tin  này?",
+                                                   OnComplete = "$('#row_" + item.ID + "').remove()",
+                                                   HttpMethod = "Delete"
+                                               })
+                                        </td>
+                                    </tr>
+                                    No++;
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = ViewBag.SearchString }))
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-6 -->
+</div>
+@section scriptNest{
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').DataTable({
+                responsive: true,
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+            });
+        });
+    </script>
+}

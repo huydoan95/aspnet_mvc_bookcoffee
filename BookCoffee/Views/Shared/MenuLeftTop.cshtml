@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Models.EF.Menu>
+
+<ul class="pull-left ul-left text-right">
+    @foreach (var item in Model)
+    {
+        <li><a href="@item.Link" title="@item.Text" target="@item.Target">@item.Text</a></li>
+    }
+</ul>
+    @*<li><a href="#" title="GIỚI THIỆU">GIỚI THIỆU</a></li>
+    <li><a href="#" title="THỰC ĐƠN">THỰC ĐƠN</a></li>
+    <li><a href="#" title="THƯ VIỆN">THƯ VIỆN</a></li>*@
+

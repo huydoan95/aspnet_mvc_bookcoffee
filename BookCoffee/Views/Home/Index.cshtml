@@ -1,0 +1,496 @@
+﻿@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listContent = (List<Models.EF.Content>
+    )ViewBag.listContent;
+    var NewestContent = (List<Models.EF.Content>
+        )ViewBag.NewestContent;
+    Models.EF.Content TopHotContent;
+    if (ViewBag.TopHotContent != null)
+    {
+        TopHotContent = (Models.EF.Content)ViewBag.TopHotContent;
+    }
+    else
+    {
+        TopHotContent = new Models.EF.Content();
+    }
+    //lấy ra danh sách  Books
+    List<Models.EF.Book>
+        listBooks;
+    if (ViewBag.listBooks != null)
+    {
+        listBooks = (List<Models.EF.Book>
+            )ViewBag.listBooks;
+    }
+    else
+    {
+        listBooks = new List<Models.EF.Book>();
+    }
+    //Lấy ra TopHot Book
+    Models.EF.Book TopHotBook = null;
+    if (ViewBag.TopHotBook != null)
+    {
+        TopHotBook = (Models.EF.Book)ViewBag.TopHotBook;
+    }
+    else
+    {
+        TopHotBook = new Models.EF.Book();
+    }
+    //Danh sách thực đơn bán chạy
+    List<Models.EF.Product> TopHotProducts = null;
+    if (ViewBag.TopHotProducts != null)
+    {
+        TopHotProducts = (List<Models.EF.Product>)ViewBag.TopHotProducts;
+    }
+    else
+    {
+        TopHotProducts = new List<Models.EF.Product>();
+    }
+    //Lấy ra sự kiện mới nhất
+    List<Models.EF._event> NewestEvents = null;
+    if (ViewBag.NewestEvents != null)
+    {
+        NewestEvents = (List<Models.EF._event>)ViewBag.NewestEvents;
+    }
+    else
+    {
+        NewestEvents = new List<Models.EF._event>();
+    }
+    //Lấy ra sự kiện TopHot
+    List<Models.EF._event> EventTopHot = null;
+    if (ViewBag.EventTopHot != null)
+    {
+        EventTopHot = (List<Models.EF._event>)ViewBag.EventTopHot;
+    }
+    else
+    {
+        EventTopHot = new List<Models.EF._event>();
+    }
+    //Lấy ra tin LawCorner TopHot
+    Models.EF.LawCorner TopHotLawCorner = null;
+    if (ViewBag.TopHotLawCorner != null)
+    {
+        TopHotLawCorner = (Models.EF.LawCorner)ViewBag.TopHotLawCorner;
+    }
+    else
+    {
+        TopHotLawCorner = new Models.EF.LawCorner();
+    }
+    //Lấy ra 3 tin luật mới nhất
+    List<Models.EF.LawCorner> NewestLawCorner = null;
+    if (ViewBag.NewestLawCorner != null)
+    {
+        NewestLawCorner = (List<Models.EF.LawCorner>)ViewBag.NewestLawCorner;
+    }
+    else
+    {
+        NewestLawCorner = new List<Models.EF.LawCorner>();
+    }
+
+    //Lấy ra danhs ách Gallery
+    List<Models.EF.ImageGallery> listGallery = null;
+    if (ViewBag.listGallery != null)
+    {
+        listGallery = (List<Models.EF.ImageGallery>)ViewBag.listGallery;
+    }
+    else
+    {
+        listGallery = new List<Models.EF.ImageGallery>();
+    }
+
+}
+
+<div class="container">
+    <div class="l-new">
+        <div class="row row-8">
+            <div class="col-md-9 col-left">
+
+                <div class="row row-8">
+                    <div class="col-sm-8">
+                        <div class="theme-default dots-none" data-interval="3">
+                            <div id="slider-nivo" class="nivoSlider">
+                                @{
+                                    var urltintuc1 = "/tin-tuc/" + TopHotContent.MetaTitle + "-" + TopHotContent.ID;
+                                }
+                                <a href="@urltintuc1" target="_blank">
+                                    <img src="@TopHotContent.Image" alt="tin mới nhất" />
+                                </a>
+                            </div>
+
+                            <div class="title-news">
+                                <h3><a href="@urltintuc1" title="@TopHotContent.Name" target="_blank">@TopHotContent.Name</a></h3>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="mod-news">
+                            <h2>
+                                <i class="fa fa-clock-o color-pink" aria-hidden="true"></i> tin mới nhất
+                            </h2>
+                            @*<div class="button-control pull-right text-right">
+                                    <a href="#" title="" class="disable"><img src="~/Assets/Client/assets/images/img-bt2.png" alt=""></a>
+                                    <a href="#" title=""><img src="~/Assets/Client/assets/images/img-bt.png" alt=""></a>
+                                </div>*@
+                            <div class="clear"></div>
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <ol>
+                                        @foreach (var item in NewestContent)
+                                        {
+                                            var urltintuc2 = "/tin-tuc/" + item.MetaTitle + "-" + item.ID;
+                                            <li>
+                                                <a href="@urltintuc2" title="@item.Name" target="_blank">@item.Name</a>
+                                            </li>
+                                        }
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slider-mini slider style-arrow-animate style-arrow-v2 dots-none">
+                    @foreach (var item in listContent)
+                    {
+                        var urltintuc3 = "/tin-tuc/" + item.MetaTitle + "-" + item.ID;
+                        <div class="item">
+                            <div class="thumnail">
+
+                                <div class="box-img">
+                                    <a href="@urltintuc3" title="@item.Name" data-id="@item.ID" target="_blank">
+                                        <img src="@item.Image" alt="@item.Name">
+                                    </a>
+                                </div>
+                                <div class="box-text">
+                                    <h3><a href="@urltintuc3" data-id="@item.ID" target="_blank">@item.Name</a></h3>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!--/.slider-mini slider style-arrow-animate style-arrow-v2 dots-none-->
+            </div>
+            <!--/.col-md-9 col-left-->
+
+            <div class="col-md-3 col-left hiddens-md">
+                <div class="mod-quang-cao mg-20px">
+                    <a href="#" title="Quang cao">
+                        <img src="~/Assets/Client/assets/images/quang-cao1.jpg" alt="quang-cao">
+                    </a>
+                </div>
+                <div class="mod-quang-cao mg-20px ps-rv">
+                    <a href="#" title="Quang cao">
+                        <img src="~/Assets/Client/assets/images/img6.jpg" alt="quang-cao">
+                    </a>
+                    <div class="ps-as text-center">
+                        <p>
+                            Giảm giá <br>
+                            <span class="strong">50%</span>
+                            Bò Nướng Than Hồng
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="mod-slide-ads margin-bottom-5em">
+        <div class="row row-8">
+            <div class="col-sm-8 col-left">
+                <div class="thumnail-slider ps-rv color-white">
+                    <div class="box-img">
+                        <img src="~/Assets/Client/assets/images/img7.jpg" alt="">
+                    </div>
+                    <div class="ps-as caption-slider">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h2><a href="#" title="CÀ PHÊ SỐ 1">CÀ PHÊ SỐ 1</a></h2>
+                            </div>
+                            <div class="col-sm-6">
+                                <p>
+                                    Được chế biến từ những hạt Culi Robusta ngon nhất có hương thơm, vị êm nhẹ vị đắng và nước pha màu đen
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--./col-sm-8 col-left-->
+
+            <div class="col-sm-4 col-right">
+                <div class="mod-quang-cao ps-rv style-v2">
+                    <a href="#" title="Quang cao">
+                        <img src="~/Assets/Client/assets/images/img8.jpg" alt="quang-cao">
+                    </a>
+                    <div class="ps-as text-center ">
+                        <p>
+                            <span class="text1">Khuyến mãi</span>
+                            <span class="text2 strong">Đặt Bàn Trước</span>
+                            <span class="text3">nhận ngay phiếu mua sách</span>
+                            <span class="text4">từ 10/11/2015 đến  20/11/2015</span>
+                            <a href="#" class="btn btn-danger margin-top-1em" title="Xem chi tiết">Xem chi tiết</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--./col-sm-4 col-right-->
+
+        </div>
+    </div>
+    <div class="mod-feature margin-bottom-4em">
+        <div class="">
+            <h2 class="text-center title-post">Thực đơn bán chạy</h2>
+            <hr class="full-hr">
+        </div>
+
+        <div class="row">
+            @foreach (var item in TopHotProducts)
+            {
+                var URLProduct1 = "/thuc-don-ban-chay/" + item.MetaTitle + "-" + item.ID;
+                <div class="col-sm-4">
+                    <div class="thumnail-feature ps-rv">
+                        <div class="box-img">
+                            <img src="@item.Image" alt="">
+                        </div>
+                        <div class="caption-feature bg-pink color-white">
+                            <h3>@item.Name</h3>
+                            <span class="price">@(item.Price != null ? item.Price.Value.ToString("00,000") : "Call") VNĐ</span>
+                        </div>
+                        <a href="@URLProduct1" class="view-link ps-as" title="@item.Name"></a>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+    <!--./mod-feature margin-bottom-4em-->
+
+    <div class="l-book margin-bottom-5em">
+        <h2 class="text-center title-post">Thư viện sách</h2>
+        <div class="bg-pink mod-book">
+            <div class="row">
+                <div class="col-sm-7 col-left">
+                    <div class="text-book color-white">
+                        @{
+                            var urlBook1 = "/sach/" + TopHotBook.MetaTitle + "-" + TopHotBook.ID;
+                        }
+                        <h2>
+                            <a href="@urlBook1" title="@TopHotBook.Name" target="_blank">@TopHotBook.Name</a>
+                        </h2>
+                        <p>
+                            Tác giả: <strong><em>@TopHotBook.Author</em></strong> <br>
+                            Thể loại: <strong><em>@TopHotBook.CategoryID</em></strong> <br>
+                            Xuất bản: <strong><em>@TopHotBook.publisher</em></strong> <br>
+                        </p>
+                        <p>
+                            <em>
+                                @Html.Raw(TopHotBook.Detail)
+                            </em>
+                        </p>
+
+                    </div>
+                </div>
+                <div class="col-sm-5 col-right">
+                    <div class="link-image">
+                        <a href="@urlBook1" title="" target="_blank">
+                            <img src="@TopHotBook.Image" alt="img">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row margin-bottom-1em">
+            @foreach (var item in listBooks)
+            {
+                var urlBook2 = "/sach/" + item.MetaTitle + "-" + item.ID;
+                <div class="col-sm-3">
+                    <div class="thumnail-book text-center">
+                        <div class="box-img">
+                            <a href="@urlBook2" title="" target="_blank">
+                                <img src="@item.Image" alt="@item.Name">
+                            </a>
+                        </div>
+                        <div class="caption">
+                            <h3>
+                                <a href="@urlBook2" title="@item.Name" target="_blank">@item.Name</a>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <p class="text-center">
+            <a href="#" title="tra cứu sách" class="btn btn-info btn-border"><i class="fa fa-search" aria-hidden="true"></i> tra cứu sách</a>
+        </p>
+    </div>
+    <!--./l-book margin-bottom-5em-->
+
+    <div class="mod-cafe-luat margin-bottom-3em">
+        <h2 class="text-center title-post">Góc cafe luật</h2>
+        <div class="row padding-bottom-1em">
+
+            @{
+                var urlLawCorner1 = "/goc-cafe-luat/" + TopHotLawCorner.MetaTitle + "-" + TopHotLawCorner.ID;
+            }
+            <div class="col-md-7 col-one">
+                <div class="thumnail-luat ps-rv color-white">
+                    <div class="box-img">
+                        <a href="@urlLawCorner1" title="@TopHotLawCorner.Name">
+                            <img src="@TopHotLawCorner.Image" alt="@TopHotLawCorner.Name">
+                        </a>
+                    </div>
+                    <div class="caption ps-as">
+                        <h2>
+                            <a href="@urlLawCorner1" title="@TopHotLawCorner.Name">@TopHotLawCorner.Name</a>
+                        </h2>
+                        <p>
+                            @Html.Raw(TopHotLawCorner.Description)
+                        </p>
+                    </div>
+                </div>
+            </div><!--./col-md-7 col-one-->
+
+            <div class="col-md-5 col-two">
+                <div class="news-list">
+                    @foreach (var item in NewestLawCorner)
+                    {
+                        var urlLawCorner2 = "/goc-cafe-luat/" + item.MetaTitle + "-" + item.ID;
+                        <article>
+                            <div class="row row-10">
+                                <div class="col-xs-4 col-left">
+                                    <a href="@urlLawCorner2" title="@item.Name">
+                                        <img src="@item.Image" alt="@item.Name">
+                                    </a>
+                                </div>
+                                <div class="col-xs-8 col-right">
+                                    <div class="news-summary">
+                                        <h3>
+                                            <a href="@urlLawCorner2" title="@item.Name">@item.Name</a>
+                                        </h3>
+                                        <div class="mom-post-meta">
+                                            <span class="entry-date"><i class="fa fa-calendar" aria-hidden="true"></i> @item.CreatedDate</span>
+                                            <span class="span-admin"><a href="@urlLawCorner2" title="@item.CreatedBy"><i class="fa fa-user" aria-hidden="true"></i> @item.CreatedBy</a></span>
+                                        </div>
+                                        <p>
+                                            @Html.Raw(item.Description)
+                                        </p>
+
+                                        <p class="text-right">
+                                            <a href="@urlLawCorner2" class="read-more-link">Xem chi tiết</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    }
+                </div>
+            </div>
+        </div>
+        <p class="text-center ">
+            <a href="#" title="tra cứu sách" class="btn btn-info btn-border"><i class="fa fa-search" aria-hidden="true"></i> tra cứu sách</a>
+        </p>
+    </div>
+    <div class="mod-event margin-bottom-3em">
+        <h2 class="text-center title-post">Sự kiện</h2>
+        <div class="row">
+            @foreach (var item in NewestEvents)
+            {
+                var urlEvent1 = "/su-kien/" + item.MetaTitle + "-" + item.ID;
+                <div class="col-sm-4">
+                    <div class="thumnail-event ps-rv">
+                        <div class="box-img ps-rv">
+                            <a href="@urlEvent1" title="@item.Name">
+                                <img src="@item.Image" alt="@item.Name">
+                            </a>
+                            <div class="event-date-time ps-as">
+                                <div class="event-date">
+                                    <span class="date">@(item.EventDate != null ? item.EventDate.Value.ToString("dd") : "null")</span>
+                                    <span class="month"> Tháng @(item.EventDate != null ? item.EventDate.Value.ToString("MM") : "null")</span>
+                                    <span class="year"> @(item.EventDate != null ? item.EventDate.Value.ToString("yyyy") : "null")</span>
+                                </div>
+                                <div class="event-time">
+                                    @(item.StartTime != null ? item.StartTime : "null")
+                                    <span class="block">–</span>
+                                    @(item.EndTime != null ? item.EndTime : "null")
+                                </div>
+                            </div>
+                        </div>
+                        <div class="caption-event">
+                            <h3><a href="@urlEvent1" title="@item.Name">@item.Name</a></h3>
+                            <span class="event-location block"><i class="fa fa-map-marker" aria-hidden="true"></i> Phòng VIP Book Coffee</span>
+                            <p>
+                                @Html.Raw(item.Description)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+        <div class="row padding-bottom-2em">
+            @foreach (var item in EventTopHot)
+            {
+                var urlEvent2 = "/su-kien-top-hot/" + item.MetaTitle + "-" + item.ID;
+                <div class="col-sm-4">
+                    <div class="thumnail-event-date">
+                        <div class="date-event bg-pink">
+                            <span class="day">@(item.EventDate != null ? item.EventDate.Value.ToString("dd") : "null")</span>
+                            <span class="mouth">T @(item.EventDate != null ? item.EventDate.Value.ToString("MM") : "null")</span>
+                        </div>
+                        <div class="text-event">
+                            <h3><a href="@urlEvent2" title="@item.Name"> @item.Name</a></h3>
+                            <p>
+                                <span class="event-location">
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                    @(item.StartTime != null ? item.StartTime : "null")
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                    Book Coffee
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <p class="text-center">
+            <a href="#" title="tra cứu sách" class="btn btn-info btn-border"><i class="fa fa-search" aria-hidden="true"></i> tra cứu sách</a>
+        </p>
+    </div>
+    <div class="mod-khong-gian margin-bottom-2em">
+        <h2 class="text-center title-post">không gian quán</h2>
+        <div class="row margin-top-2em">
+            <div class="col-md-6">
+                <div class="row">
+                    @foreach (var image in listGallery)
+                    {
+                        <div  class="col-sm-4">
+                            <a href="@image.ImagePath" title="Không gian quán" class="boxer">
+                                <img src="@image.ImagePath" alt="@image.Name" style='max-height: 100%; width: 100%; object-fit: contain' >
+                            </a>
+                        </div>
+                    }
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="slider-wrapper theme-default dots-none" data-interval="3">
+                    <div id="slider2" class="nivoSlider">
+                        @foreach (var image in listGallery)
+                        {
+                            <img src="@image.ImagePath" data-thumb="@image.ImagePath" alt="" />
+                            
+                        }
+                        @*<img src="~/Assets/Client/assets/images/img32.jpg" data-thumb="~/Assets/Client/assets/images/img1.jpg" alt="" />
+                        <img src="~/Assets/Client/assets/images/img32-2.jpg" data-thumb="~/Assets/Client/assets/images/img1.jpg" alt="" />*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

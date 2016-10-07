@@ -1,0 +1,62 @@
+﻿@model Models.EF.Content
+
+@{
+    ViewBag.Title = "ContentDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+@section header{}
+<div class="col-md-12">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h4>@Html.DisplayNameFor(model => model.Name) :@Html.DisplayFor(model => model.Name)</h4>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.CategoryID)</th>
+                            <th>@Html.DisplayNameFor(model => model.Name)</th>
+                            <th>@Html.DisplayNameFor(model => model.Image)</th>
+                            <th>@Html.DisplayNameFor(model => model.Description)</th>
+                            <th>@Html.DisplayNameFor(model => model.Detail)</th>
+                            <th>@Html.DisplayNameFor(model => model.MetaKeywords)</th>
+                            <th>@Html.DisplayNameFor(model => model.MetaDescriptions)</th>
+                            <th>@Html.DisplayNameFor(model => model.TopHot)</th>
+                            <th>@Html.DisplayNameFor(model => model.Tags)</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Html.DisplayFor(model => model.CategoryID)</td>
+                            <td>@Html.DisplayFor(model => model.Name)</td>
+                            <td>
+                                <img src="@Html.DisplayFor(model => model.Image)" width="200px;" height="200px;"/> 
+                            
+                             </td>
+                            <td>@Html.DisplayFor(model => model.Description)</td>
+                            <td>@Html.DisplayFor(model => model.Detail)</td>
+                            <td>@Html.DisplayFor(model => model.MetaKeywords)</td>
+                            <td>@Html.DisplayFor(model => model.MetaDescriptions)</td>
+                            <td>@Html.DisplayFor(model => model.TopHot)</td>
+                            <td>@Html.DisplayFor(model => model.Tags)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+        <!--/. panel-body-->
+        <div class="panel-footer">
+            <div class="btn btn-outline btn-success">@Html.ActionLink("Quay lại", "Index", null, null)</div>
+            <div class="btn btn-outline btn-success">@Html.ActionLink("Cập nhật", "UpdateContent", "Content", new { id = Model.ID }, null)</div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

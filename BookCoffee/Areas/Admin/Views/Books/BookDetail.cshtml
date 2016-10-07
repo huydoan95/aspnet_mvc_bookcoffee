@@ -1,0 +1,51 @@
+﻿@model Models.EF.Book
+
+@{
+    ViewBag.Title = "BookDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+@section header{}
+
+<div class="col-md-12">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h4>@Html.DisplayNameFor(model => model.Name) :@Html.DisplayFor(model => model.Name)</h4>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Image)</th>
+                            <th>@Html.DisplayNameFor(model => model.Description)</th>
+                            <th>@Html.DisplayNameFor(model=>model.Author)</th>
+                            <th>@Html.DisplayNameFor(model => model.publisher)</th>
+                            <th>@Html.DisplayNameFor(model => model.CreatedBy)</th>
+                            <th>@Html.DisplayNameFor(model => model.CreatedDate)</th>
+                            <th>@Html.DisplayNameFor(model => model.ModifiedBy)</th>
+                            <th>@Html.DisplayNameFor(model => model.ModifiedDate)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="@Html.DisplayFor(model => model.Image)" style="width:150px;height:150px;" /></td>
+                            <td>@Html.DisplayFor(model => model.Description)</td>
+                            <th>@Html.DisplayFor(model => model.Author)</th>
+                            <th>@Html.DisplayFor(model => model.publisher)</th>
+                            <td>@Html.DisplayFor(model => model.CreatedBy)</td>
+                            <td>@Html.DisplayFor(model => model.CreatedDate)</td>
+                            <td>@Html.DisplayFor(model => model.ModifiedBy)</td>
+                            <td>@Html.DisplayFor(model => model.ModifiedDate)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+        <!--/. panel-body-->
+        <div class="panel-footer">
+            <div class="btn btn-outline btn-success">@Html.ActionLink("Quay lại", "Index", null, null)</div>
+            <div class="btn btn-outline btn-success">@Html.ActionLink("Cập nhật", "UpdateBook", "Books", new { id = Model.ID }, null)</div>
+        </div>
+    </div>
+</div>

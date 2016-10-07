@@ -1,0 +1,114 @@
+﻿@model Models.EF.Menu
+
+@{
+    ViewBag.Title = "CreateMenu";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+@section header{}
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <h4>Tạo mới Menu</h4>
+            </div>
+            @using (Html.BeginForm("CreateMenu", "Menu", FormMethod.Post))
+            {
+                <div class="panel-body">
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Link, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Link, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Link, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DisplayOrder, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.DisplayOrder, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DisplayOrder, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @{
+                            List<SelectListItem> listTargets = new List<SelectListItem>();
+                            listTargets.Add(new SelectListItem
+                            {
+                                Text = "---Select Target ---",
+                                Value = "0"
+                            });
+                            listTargets.Add(new SelectListItem
+                            {
+                                Text = "_self",
+                                Value = "_self"
+                            });
+                            listTargets.Add(new SelectListItem
+                            {
+                                Text = "_blank",
+                                Value = "_blank",
+                            });
+                            listTargets.Add(new SelectListItem
+                            {
+                                Text = "_parent",
+                                Value = "_parent",
+                            });
+                            listTargets.Add(new SelectListItem
+                            {
+                                Text = "_top",
+                                Value = "_top",
+                            });
+
+                        }
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Target, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(model => model.Target, listTargets,null, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Target, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-8">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.status)
+                                    @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TypeID, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(model => model.TypeID,null, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.TypeID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            <!--./panel-body-->
+                <div class="panel-footer">
+                    <div class="btn btn-outline btn-success">@Html.ActionLink("Quay lại", "Index")</div>
+                    <input type="submit" value="Tạo mới" class="btn btn-primary" />
+                    @Html.ValidationMessage("CreateCategoryError", new { @class = "text-danger" })
+                </div>
+            }
+        </div>
+    </div>
+    <!-- /.col-lg-4 -->
+</div>
+

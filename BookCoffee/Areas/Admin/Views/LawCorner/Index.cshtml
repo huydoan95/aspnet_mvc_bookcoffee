@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Models.EF.LawCorner>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+@section header{
+    <h1> Danh sách tin luật</h1>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a href="/Admin/LawCorner/Create">
+                    <i class="fa fa-plus-square" aria-hidden="true">
+                        Tạo mới
+                    </i>
+                </a>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tiêu đề </th>
+                            <th>Hình</th>
+                            <th>Cho phép đăng</th>
+                            <th>Top Hot</th>
+                            <Th>Thao tác</Th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int i = 1;
+                            foreach (var item in Model)
+                            {
+                                <tr id="row_@item.ID">
+                                    <td style="width:5%">@i</td>
+                                    <td style="width:30%">@item.Name</td>
+                                    <td style="width:10%"><img height="100px" width="100px" src="@item.Image" /></td>
+                                    <td style="width:10%">
+                                        <a href="#" class="ChangeStatus" data-id="@item.ID" title="Click để đổi trạng thái">@(item.Status ? "Yes" : "No")  </a>
+                                    </td>
+                                    <td style="width:10%">
+                                        <a href="#" class="ChangeTopHot" data-id="@item.ID" title="Click để đổi trạng thái">@(item.TopHot ? "Yes" : "No")  </a>
+                                    </td>
+                                    <td style="width:18%">
+                                        <i class="fa fa-info" aria-hidden="true"></i>
+                                        <a href="/Admin/LawCorner/LawCornerDetail/@item.ID">Chi tiết</a>
+                                        |
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        <a href="/Admin/LawCorner/UpdateLawCorner/@item.ID">Sửa</a>
+                                        |
+                                        @*<a href="/Admin/User/delete/@item.ID">Xóa</a>*@
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                        @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
+                                   {
+                                       //Hiện thông báo confirm trước khi xóa
+                                       Confirm = "Bạn có thực sự muốn xóa sách?",
+                                       OnComplete = "$('#row_" + item.ID + "').remove()",
+                                       HttpMethod = "Delete"
+                                   })
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+
+                        }
+                    </tbody>
+                </table>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+@section scriptNest{
+    <script src="~/Assets/Admin/js/LawCornerController.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').DataTable({
+                responsive: true,
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tất cả"]],
+                "language": {
+                    "lengthMenu": "Hiển thị _MENU_ Dòng"
+                }
+            });
+        });
+    </script>
+}
