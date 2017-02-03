@@ -13,6 +13,7 @@ namespace Models.EF
         }
 
         public virtual DbSet<About> Abouts { get; set; }
+        public virtual DbSet<Author> Authors { get; set; }
         public virtual DbSet<BookCategory> BookCategories { get; set; }
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
@@ -26,8 +27,11 @@ namespace Models.EF
         public virtual DbSet<LawCorner> LawCorners { get; set; }
         public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<MenuType> MenuTypes { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
+        public virtual DbSet<Publisher> Publishers { get; set; }
         public virtual DbSet<Slide> Slides { get; set; }
         public virtual DbSet<SystemConfig> SystemConfigs { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
@@ -45,6 +49,10 @@ namespace Models.EF
 
             modelBuilder.Entity<About>()
                 .Property(e => e.ModifiedBy)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Author>()
+                .Property(e => e.MetaTitle)
                 .IsUnicode(false);
 
             modelBuilder.Entity<BookCategory>()
@@ -136,6 +144,10 @@ namespace Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<ImageGallery>()
+                .Property(e => e.MetaTitle)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ImageGallery>()
                 .Property(e => e.CreatedBy)
                 .IsUnicode(false);
 
@@ -154,6 +166,10 @@ namespace Models.EF
             modelBuilder.Entity<LawCorner>()
                 .Property(e => e.ModifiedBy)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<OrderDetail>()
+                .Property(e => e.Price)
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<Product>()
                 .Property(e => e.Code)
@@ -189,6 +205,10 @@ namespace Models.EF
 
             modelBuilder.Entity<ProductCategory>()
                 .Property(e => e.ModifiedBy)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Publisher>()
+                .Property(e => e.MetaTitle)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Slide>()

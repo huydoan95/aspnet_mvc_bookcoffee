@@ -38,7 +38,7 @@
                                     <td style="width:5%">@i</td>
                                     <td style="width:20%">@item.Name</td>
                                     <td style="width:5%"><img src="@item.Image" width="100px" height="100px" /></td>
-                                    <td style="width:30%">@item.Description</td>
+                                    <td style="width:30%">@Html.Raw(item.Description)</td>
                                     <td style="width:5%">
                                         <a href="#" class="EventChangeStatus" data-id="@item.ID" title="Click để đổi trạng thái">@(item.Status ? "Sử dụng" : "Không sử dụng")  </a>
                                     </td>

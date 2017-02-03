@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Models.EF.ProductCategory>
+<div class="box-sidebar">
+    <div class="header-siderbar bg-pink">
+        <h3 class="text-center">
+            Các loại thực đơn
+        </h3>
+    </div>
+    <div class="menu-left">
+        <ul class="ls-none">
+            @foreach (var item in Model)
+            {
+                var url = "/thuc-don-theo-loai/" + item.MetaTitle + "-" + item.ID;
+                <li>
+
+                    <a class="ProdItem" href="@url" title="@item.Name" style="font-size:18px;" data-id="@item.ID">
+                        <i class="fa fa-angle-right" aria-hidden="true">
+                        </i> @item.Name
+                    </a>
+
+                </li>
+            }
+        </ul>
+    </div>
+</div>

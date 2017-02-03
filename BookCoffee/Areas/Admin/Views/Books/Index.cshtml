@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Models.EF.Book>
+﻿@model IEnumerable<Models.ViewModels.BooksViewModel>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
@@ -36,8 +36,8 @@
                             {
                                 <tr id="row_@item.ID">
                                     <td style="width:5%">@i</td>
-                                    <td style="width:30%">@item.Name</td>
-                                    <td style="width:10%">@item.CategoryID</td>
+                                    <td style="width:25%">@item.Name</td>
+                                    <td style="width:15%">@item.CategoryName</td>
                                     <td style="width:10%"><img height="100px" width="100px" src="@item.Image" /></td>
                                     <td style="width:10%">
                                         <a href="#" class="BookChangeStatus" data-id="@item.ID" title="Click để đổi trạng thái">@(item.Status ? "Đang sử dụng" : "Không sử dụng")  </a>

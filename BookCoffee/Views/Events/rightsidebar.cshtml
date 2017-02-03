@@ -1,0 +1,32 @@
+﻿<div class="l-sidebar">
+    <div class="mod-sidebar sidebar-v2 no-bg">
+        <div class="box-sidebar">
+            <h3>Lịch sự kiên</h3>
+            <div id="datepicker"></div>
+        </div>
+        <div class="box-sidebar">
+            <h3>Danh mục sự kiện</h3>
+            <div class="menu-left">
+                <ul class="ls-none">
+                    <li><a href="#" title="Văn học trong nước"><i class="fa fa-angle-right" aria-hidden="true"></i> Văn học trong nước</a></li>
+                    <li><a href="#" title="Văn học nước ngoài"><i class="fa fa-angle-right" aria-hidden="true"></i> Văn học nước ngoài</a></li>
+                    <li><a href="#" title="Truyện thiếu nhi"><i class="fa fa-angle-right" aria-hidden="true"></i> Truyện thiếu nhi</a></li>
+                    <li><a href="#" title="Truyện tranh"><i class="fa fa-angle-right" aria-hidden="true"></i> Truyện tranh</a></li>
+                    <li><a href="#" title="Sách kinh tế"><i class="fa fa-angle-right" aria-hidden="true"></i> Sách kinh tế</a></li>
+                    <li><a href="#" title="Sách chuyên ngành"><i class="fa fa-angle-right" aria-hidden="true"></i> Sách chuyên ngành</a></li>
+                    <li><a href="#" title="Sách tham khảo"><i class="fa fa-angle-right" aria-hidden="true"></i> Sách tham khảo</a></li>
+                    <li><a href="#" title="Sách học ngoại ngữ - từ điển"><i class="fa fa-angle-right" aria-hidden="true"></i> Sách học ngoại ngữ - từ điển</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="box-sidebar">
+            <h3>Hình ảnh sự kiện</h3>
+            @{Html.RenderAction("listEventImages","Events"); }
+        </div>
+        <div class="quangcao">
+            <a href="#" title="">
+                <img src="~/Assets/Client/images/img38.jpg" alt="">
+            </a>
+        </div>
+    </div>
+</div>

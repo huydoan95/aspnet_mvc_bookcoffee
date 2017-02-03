@@ -1,0 +1,173 @@
+﻿@model Models.EF.About
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
+
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-classic.css" />
+}
+
+@*
+    Author: Huy Doan
+    Phone: 01647313460
+    Date created: January 20, 2017
+*@
+
+
+
+
+<div class="container">
+    <!-- Empty row -->
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+            <div style="height: 20px;"></div>
+        </div>
+    </div>
+    <!-- Empty row -->
+    <!-- Image -->
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <img src="@Model.Image" class="img-responsive center-block" alt="Giới thiệu">
+            @*<img src="~/Assets/Client/images/IMG_0429-300x200.jpg" class="img-responsive center-block" alt="Giới thiệu">*@
+        </div>
+    </div>
+    <!-- Image -->
+    <!-- Title -->
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="text-center"><h1>@Model.Name</h1></div>
+            @*<div class="text-center"><h1>Giới thiệu</h1></div>*@
+        </div>
+    </div>
+    <!-- Title -->
+    <hr />
+    <!-- Meta Post -->
+    <div class="row">
+        <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+            <div class="post-meta">
+                <span>On: <time datetime="DD-MM-YYYY">@Model.ModifiedDate</time></span><span> By: @Model.ModifiedBy@*<a href="#" title="View all posts in Slide">@Model.ModifiedBy</a>*@</span>
+            </div>
+        </div>
+    </div>
+    <!-- Meta Post -->
+    <hr />
+    <!-- Content -->
+    <div class="row about-content">
+        <!-- Description and detail -->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            @*<p style="text-align: justify;"><strong>Đôi nét về Book Coffee – Nơi khơi nguồn tri thức</strong></p>
+            <p style="text-align: justify;"><a href="~/Assets/Client/images/IMG_0429.jpg"><img class="alignleft img-responsive" src="~/Assets/Client/images/IMG_0429-300x200.jpg" alt="IMG_0429"></a></p>
+            <p style="text-align: justify;">
+                Book Coffee ra đời
+                với mong muốn là một điểm nhấn của sự phát triển về văn hóa trong đời
+                sống xã hội phong phú, đa dạng của Bình Dương, với hy vọng là điểm đến
+                cho những người yêu nét cổ điển, truyền thống và mong muốn chung tay xây
+                dựng một nét văn hóa truyền thống trong lòng Bình Dương- văn hóa đọc
+                sách. Xuất phát điểm từ một sinh viên năm nhất hay lên thư viện học tập,
+                một không khí khá yên tĩnh và mát mẻ nhưng chỉ được mang nước suối vào
+                thư viện, tôi nuôi hi vọng sau này sẽ xây dựng được một quán café với
+                không gian yên tĩnh, rộng rãi, thoáng mát với thật nhiều sách và nhiều
+                loại thức uống đa dạng, để tạo môi trường thoải mái cho các bạn sinh
+                viên chọn làm điểm đến để học tập, giao lưu, trao đổi kiến thức cũng là
+                địa điểm để những người trưởng thành có một môi trường yên tĩnh thoáng
+                mát để trao đổi công việc. Ý tưởng đó đã theo tôi suốt một chặng đường
+                khá dài, sau khi tốt nghiệp đại học ra trường và đi làm, tôi vẫn ấp ủ
+                giấc mơ ấy. Đến năm 2014, với suy nghĩ “nếu chỉ ước muốn thì mãi mãi nó
+                chỉ là ước&nbsp;muốn, tôi phải làm!”
+            </p>
+            <p style="text-align: justify;">
+                Tôi bắt tay vào xây
+                dựng một quán café với quá nhiều điều chưa biết, nhưng với sự giúp sức
+                của gia đình, bạn bè, đồng nghiệp và sự ủng hộ của những người yêu sách,
+                Library Coffee – Nơi khơi nguồn tri thức đã đi vào hoạt động đầu tháng
+                12/2014, mặc dù sinh sau đẻ muộn nhưng với nét đặc trưng riêng của mình
+                Library Coffee đã dần dần được biết đến và đi vào lòng những người yêu
+                sách, yêu sự yên tĩnh và T háng 12/2015 Library Coffee tròn 01 năm hoạt
+                động
+            </p>
+            <p style="text-align: justify;"><a href="~/Assets/Client/images/IMG_0407.jpg"><img class="alignright img-responsive" src="~/Assets/Client/images/IMG_0407-300x200.jpg" alt="IMG_0407"></a></p>
+            <p style="text-align: justify;">
+                Library Coffee đã
+                nộp đơn đăng ký thương hiệu sản phẩm với Cục Sở hữu trí tuệ, tuy nhiên
+                thương hiệu Library Coffee đã được đăng ký bảo hộ thương hiệu vào tháng
+                6/2015, nhằm tánh sự tranh chấp không đáng có sau này, Library Coffee
+                quyết định tiến hành đăng ký tên thương hiệu CVBook Coffee và được Cục
+                sở hữu trí tuệ có quyết định chấp nhận đơn, và thương hiệu Book Coffee –
+                Nơi khơi nguồn tri thức được chính thức sử dụng thay cho Library Coffee
+                từ đầu tháng 12/2015.Để tiếp tục phát triển thì Book Coffee phải mở
+                rộng không gian, cải tiến, nâng cao chất lượng, phong cách phục vụ và
+                tiến hành nhiều hơn các hoạt động mang tính tri thức và miễn phí cho mọi
+                người. Bên cạnh đó, quan trọng nhất là sự ủng hộ của quý khách hàng.
+            </p>
+            <p style="text-align: justify;">
+                Với không gian
+                thoáng nhiều sự lựa chọn như phòng lạnh đọc sách, khu trong nhà, khu
+                ngoài trời sân vườn, kết hợp với sinh hoạt Club tiếng Anh miễn phí tối
+                thứ 4 và sáng chủ nhật hàng tuần, Book Coffee rất mong muốn được là sự
+                lựa chọn của quý khách hàng cho nhu cầu thư giãn, giải trí, học tập và
+                trao đổi công việc của quý khách hàng.
+            </p>
+            <p style="text-align: justify;">Book Coffee chân thành cám ơn quý khách!</p>*@
+            @Html.Raw(@Model.Description)
+            @Html.Raw(@Model.Detail)
+            <div id="share"></div>
+        </div>
+        <!-- Description -->
+
+
+    </div>
+    <!-- Content -->
+    @*<hr/>*@
+    <!-- Previous/Next Post -->
+    @*<div class="row postsNavigation vdivide">
+
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 nav-col-left">
+            <a href="#">
+                <!-- Image -->
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">Image</div>
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 text-center">
+                    << Về trước
+                    <!-- Next title post -->
+                    <br />
+                    Title 1
+                </div>
+            </a>
+        </div>
+
+
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 nav-col-right">
+            <a href="#">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 text-center">
+                    Tiếp theo >>
+                    <!-- Next title post -->
+                    <br />
+                    Title 2
+                </div>
+                <!-- Image -->
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-right">Image</div>
+            </a>
+        </div>
+
+    </div>*@
+    <!-- Previous/Next Post -->
+    @*<hr/>*@
+</div>
+
+@section scriptNest{
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
+
+    <script>
+        jsSocials.shareStrategies["my-popup"] = function (args) {
+            return $("<div>").click(function () {
+                window.open(args.shareUrl, "MyShareWindow", "width=800, height=600, location=1, resizeable=1, menubar=0, scrollbars=0, status=0, titlebar=0, toolbar=0")
+            });
+        }
+
+        $("#share").jsSocials({
+            shareIn:"my-popup",
+            shares: ["twitter", "facebook", "googleplus", "linkedin", "pinterest"]
+        });
+    </script>
+
+}

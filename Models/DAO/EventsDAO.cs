@@ -24,19 +24,30 @@ namespace Models.DAO
         //Phương thức lấy ra danh sách sự kiện dùng cho client
         public List<_event> listEventsClient()
         {
-            return db.events.Where(x => x.Status == true).ToList();
+            return db.events.Where(x => x.Status == true).OrderByDescending(x=>x.EventDate).ToList();
         }
 
-        //Lấy ra sự kiện mới nhất nhưng không thuộc tophot số lượng theo quanlity
+        //Lấy ra sự kiện mới nhất nhưng không thuộc tophot, số lượng theo quanlity
+        /// <summary>
+        /// select by quanlity
+        /// </summary>
+        /// <param name="quanlity"></param>
+        /// <returns></returns>
         public List<_event> newestEvents(int quanlity) {
             
-            return db.events.Where(x => x.Status == true && x.TopHot == false).OrderByDescending(x => x.CreatedDate).Take(quanlity).ToList();
+            return db.events.Where(x => x.Status == true && x.TopHot == false)
+                .OrderByDescending(x => x.CreatedDate).Take(quanlity).ToList();
         }
 
         //Lấy ra  sự kiện thuộc tophot
+        /// <summary>
+        /// Nếu index =0 thì lấy ra tất cả những sự kiện thuộc tophot
+        /// Nếu index =1 thì lấy ra quanlity sự kiện tophot
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="quanlity"></param>
+        /// <returns></returns>
         public List<_event> TopHotEvents(int index, int  quanlity =0) {
-            //Nếu index =0 thì lấy ra tất cả những sự kiện thuộc tophot
-            //Nếu index =1 thì lấy ra 3 sự kiện tophot
             List<_event> list=null;
             if (index == 0)
             {

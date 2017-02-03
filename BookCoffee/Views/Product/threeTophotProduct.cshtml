@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Models.EF.Product>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        var URLProduct = "/thuc-don-ban-chay/" + item.MetaTitle + "-" + item.ID;
+        <div class="col-sm-4">
+            <div class="thumnail-product">
+                <h3><a href="#" title="Cà phê">@item.Name</a></h3>
+                <div class="box-img ps-rv"  data-id="@item.ID">
+                    <img src="@item.Image" alt="img" class="square_images">
+                    <div class="thumnail-text-product">
+                        <h4>@item.Name</h4>
+                        <h3>Số đặc biệt</h3>
+                        <label for="" class="price">@item.Price đ</label>
+                    </div>
+                </div>
+                <div class="group-btn table-div">
+                    <div class="table-cell">
+                        <a data-id="@item.ID" href="#" class="btn btn-default" title="xem hình">Xem hình</a>
+                    </div>
+                    <div class="table-cell">
+                        <a href="@URLProduct" title="chi tiết..." class="add-cart"><i class="fa fa-info" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

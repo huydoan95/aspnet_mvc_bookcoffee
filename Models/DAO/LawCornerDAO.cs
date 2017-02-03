@@ -33,6 +33,12 @@ namespace Models.DAO
             return db.LawCorners.Where(x=>x.Status==true && x.TopHot!=true).OrderByDescending(x => x.CreatedDate).Take(quanlity).ToList();
         }
 
+        //Lấy ra tin TopHot hiển thị ra Client
+        public List<LawCorner> TopHotForClient()
+        {
+            return db.LawCorners.Where(x => x.Status == true && x.TopHot == true).OrderByDescending(x => x.CreatedDate).ToList();
+        }
+
         //Kiem tra su ton tai cho create
         public bool LawCornerExist(string LawCornerTitle)
         {
@@ -197,10 +203,6 @@ namespace Models.DAO
             }
         }
 
-        //Lấy ra tin TopHot hiển thị ra Client
-        public LawCorner TopHotForClient()
-        {
-            return db.LawCorners.SingleOrDefault(x => x.TopHot == true);
-        }
+        
     }
 }

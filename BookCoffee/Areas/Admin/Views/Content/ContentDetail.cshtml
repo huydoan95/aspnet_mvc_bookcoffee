@@ -35,8 +35,8 @@
                                 <img src="@Html.DisplayFor(model => model.Image)" width="200px;" height="200px;"/> 
                             
                              </td>
-                            <td>@Html.DisplayFor(model => model.Description)</td>
-                            <td>@Html.DisplayFor(model => model.Detail)</td>
+                            <td>@Html.Raw(Model.Description)</td>
+                            <td>@Html.Raw(Model.Detail)</td>
                             <td>@Html.DisplayFor(model => model.MetaKeywords)</td>
                             <td>@Html.DisplayFor(model => model.MetaDescriptions)</td>
                             <td>@Html.DisplayFor(model => model.TopHot)</td>

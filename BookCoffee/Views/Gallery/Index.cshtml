@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scriptNest{
+    <script src="~/Assets/Admin/js/GalleryController.js"></script>
+}
+
+<div class="three-space"></div>
+<div class="l-gallery" id="Gallery_Client_Index">
+    <div class="container">
+        <!--Slider-->
+        <div class="slider-gallary single-item">
+            @{Html.RenderAction("slider", "Gallery"); }
+        </div>
+        <!--./Slider-->
+        <!-- list of galleries -->
+        <div class="mod-portfolio">
+           @{Html.RenderAction("lstGallery","Gallery"); }
+        </div>
+        <!-- ./list of galleries -->
+    </div>
+
+</div>
+

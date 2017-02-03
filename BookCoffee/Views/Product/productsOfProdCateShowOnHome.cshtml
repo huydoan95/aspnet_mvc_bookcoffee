@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Models.EF.Product>
+
+<div class="l-list-product">
+    <div class="headline">
+        <div class="row row-0">
+            <div class="col-sm-4">
+                <h2>@ViewBag.ProdCateName</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <!-- begin isotope-images -->
+        <table width="100%" id="dataTables-example">
+            <thead>
+                <tr>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    var urlBook1 = "/thuc-don-ban-chay/" + item.MetaTitle + "-" + item.ID;
+                    <tr class="col-sm-3 isotope-item element image front-end" data-category="image">
+                        <td>
+                            <div class="isotope">
+                                <div class="thumnail-book-v2 ps-rv">
+                                    <div class="box-img">
+                                        <img src="@item.Image" alt="@item.Name"  />
+                                    </div>
+                                    <div class="box-text">
+                                        <div class="table-div">
+                                            <div class="table-cell">
+                                                <h4>@item.Name</h4>
+                                                <a href="@urlBook1" title="Chi tiết" class="btn btn-border">Chi tiết</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        @*<ul class="ls-none isotope-images isotope-images-row">
+            <li class="col-md-4 col-sm-6 isotope-item element image front-end" data-category="image">
+                <div class="isotope">
+                    <div class="thumnail-book-v2 ps-rv">
+                        <div class="box-img">
+                            <img src="assets/images/img34.jpg" alt="img">
+                        </div>
+                        <div class="box-text">
+                            <div class="table-div">
+                                <div class="table-cell">
+                                    <h3>Cà phê số 1</h3>
+                                    <h4 class="price">35.000 vnd</h4>
+                                    <a href="#" title="Chi tiết" class="btn btn-border">Chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+           
+        </ul>*@
+        <!-- end isotope-images -->
+    </div>
+</div>

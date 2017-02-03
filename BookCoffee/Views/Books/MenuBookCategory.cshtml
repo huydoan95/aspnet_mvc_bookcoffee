@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Models.EF.BookCategory>
+<div class="box-sidebar">
+    <ul class="ls-none">
+        @foreach (var item in Model)
+        {
+            <li>
+                <a href="@item.MetaTitle" title="@item.Name" data-id="@item.ID">
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    @item.Name
+                </a>
+            </li>
+        }
+    </ul>
+</div>

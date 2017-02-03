@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using System.Xml.Linq;
+using BookCoffee.Areas.Admin.Models;
 
 namespace BookCoffee.Areas.Admin.Controllers
 {
@@ -15,7 +18,7 @@ namespace BookCoffee.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var dao = new ProductDAO();
-            var model = dao.listProduct();
+            var model = dao.listProductView();
             return View(model);
         }
 
@@ -137,10 +140,79 @@ namespace BookCoffee.Areas.Admin.Controllers
             });
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="images"></param>
+        /// <returns></returns>
+        public JsonResult saveImages(long id,string images) {
+            //tên biến phải trùng với tên data truyền qua từ Ajax
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            var listImages = serializer.Deserialize<List<string>>(images);
+            XElement xElement = new XElement("Images");
+            foreach (var item in listImages) {
+                xElement.Add(new XElement("image",item));
+            }
+            try
+            {
+                var dao = new ProductDAO();
+                dao.updateImage(id, xElement.ToString());
+                return Json(new
+                {
+                    status = true
+                });
+            }
+            catch (Exception ex) {
+                return Json(new
+                {
+                    status = false
+                });
+            }
+           
+        }
+
+        public JsonResult LoadImage(long id) {
+            Product product = new ProductDAO().productDetail(Convert.ToInt32(id));
+            var images = product.MoreImage;
+            XElement xElement = XElement.Parse(images);
+            List<string> listImageReturn = new List<string>();
+            foreach (XElement element in xElement.Elements()) {
+                listImageReturn.Add(element.Value);
+            }
+            return Json(new {
+                data = listImageReturn
+            },JsonRequestBehavior.AllowGet);
+        }
+
+
+       
+        public ActionResult loadImages(long ? id) {
+            Product product = new ProductDAO().productDetail(Convert.ToInt32(id));
+            listImagesProductModel ListimageProduct = new listImagesProductModel();
+            List<string> listImageReturn = new List<string>();
+            try
+            {
+                var images = product.MoreImage;
+                XElement xElement = XElement.Parse(images);
+               
+                foreach (XElement element in xElement.Elements())
+                {
+                    listImageReturn.Add(element.Value);
+                }
+                ListimageProduct.images = listImageReturn;
+            }
+            catch (Exception ex) {
+
+            }
+            return PartialView(ListimageProduct);
+        }
+
 
         //Phương thức dùng thử nghiem
         [HttpGet]
-        public ActionResult test() {
+        public ActionResult test()
+        {
             return View();
         }
         [HttpPost]
@@ -150,5 +222,6 @@ namespace BookCoffee.Areas.Admin.Controllers
             bool result = dao.create(entity);
             return View();
         }
+
     }
 }

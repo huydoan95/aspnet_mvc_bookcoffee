@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Models.ViewModels.BooksViewModel>
+<div class="single-item slider-book" >
+    @foreach (var item in Model)
+    {
+        var urlBook1 = "/sach/" + item.MetaTitle + "-" + item.ID;
+        <div class="item" >
+            <div class="bg-pink mod-book">
+                <div class="row">
+                    <div class="col-sm-7 col-left">
+                        <div class="text-book color-white">
+                            <h2>
+                                <a href="@urlBook1" title="@item.Name">@item.Name</a>
+                            </h2>
+                            <p>
+                                <em>
+                                    @Html.Raw(item.Description)
+                                </em>
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-5 col-right">
+                        <div class="link-image">
+                            <a href="@urlBook1" title="">
+                                <img src="@item.Image" alt="img" >
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div><!--End bg-pink mod-book-->
+        </div>
+
+
+        @*<div class="item bg" style="background-image: url(@item.Image);background-repeat: no-repeat;background-position: 30% 20%; ">
+            <div class="text-slider color-white">
+                <h2>@item.Name</h2>
+                <p>
+                    @Html.Raw(item.Description)
+                </p>
+            </div>
+        </div>*@
+    }
+</div>

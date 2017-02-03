@@ -20,6 +20,11 @@ namespace BookCoffee.Areas.Admin.Controllers
         }
 
         //Phương thức nhận kiểu thông báo và gán thông báo cho user 
+        /// <summary>
+        /// 0 : Seccess ; 1 : Warning ; 2 : Danger ; 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="type"></param>
         protected void SetAltert(string message, int type) {
             TempData["AlertMessage"] = message;
             if (type == 0)

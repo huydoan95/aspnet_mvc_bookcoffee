@@ -21,7 +21,12 @@
                     }
                 }
             });
-        })
+        });
+        if ($('#book_client_index').length) {
+            squareThis('.square_images');
+            squareThis('.item',0.67);
+        }
+       
     }
 }
 book.init();

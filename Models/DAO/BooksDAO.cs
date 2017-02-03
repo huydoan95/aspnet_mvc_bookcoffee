@@ -1,4 +1,5 @@
 ﻿using Models.EF;
+using Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,234 @@ namespace Models.DAO
         }
 
         //Lấy ra danh sách tất cả sách dùng cho Admin
-        public List<Book> listBooks()
+        //public List<Book> listBooks()
+        //{
+        //    return db.Books.OrderByDescending(x => x.Status).ToList();
+        //}
+
+        /// <summary>
+        /// Danh sách sách dùng cho trang quản trị
+        /// </summary>
+        /// <returns></returns>
+        public List<BooksViewModel> listBooks()
         {
-            return db.Books.OrderByDescending(x => x.Status).ToList();
+            var model = from a in db.Books
+                        join b in db.BookCategories
+                        on a.CategoryID equals b.ID
+                        where a.CategoryID == b.ID
+                        select new BooksViewModel()
+                        {
+                            ID = a.ID,
+                            Name = a.Name,
+                            Author = a.Author,
+                            publisher = a.publisher,
+                            MetaTitle = a.MetaTitle,
+                            Description = a.Description,
+                            Image = a.Image,
+                            Price = a.Price,
+                            PromotionPrice = a.PromotionPrice,
+                            IncludedVAT = a.IncludedVAT,
+                            Quantity = a.Quantity,
+                            CategoryName = b.Name,
+                            Detail = a.Detail,
+                            CreatedDate = a.CreatedDate,
+                            CreatedBy = a.CreatedBy,
+                            ModifiedDate = a.ModifiedDate,
+                            ModifiedBy = a.ModifiedBy,
+                            MetaKeywords = a.MetaKeywords,
+                            MetaDescriptions = a.MetaDescriptions,
+                            Status = a.Status,
+                            TopHot = a.TopHot,
+                            ViewCount = a.ViewCount
+                        };
+            return model.ToList();
         }
 
         //Lấy ra danh sách tất cả các sách dùng cho client
-        public List<Book> ListBooksClient() {
-            return db.Books.Where(x => x.Status == true).OrderBy(x => x.Name).ToList();
+        public List<BooksViewModel> ListBooksClient()
+        {
+            var model = from a in db.Books
+                        join b in db.BookCategories
+                        on a.CategoryID equals b.ID
+                        where a.CategoryID == b.ID && a.Status==true
+                        select new BooksViewModel()
+                        {
+                            ID = a.ID,
+                            Name = a.Name,
+                            Author = a.Author,
+                            publisher = a.publisher,
+                            MetaTitle = a.MetaTitle,
+                            Description = a.Description,
+                            Image = a.Image,
+                            Price = a.Price,
+                            PromotionPrice = a.PromotionPrice,
+                            IncludedVAT = a.IncludedVAT,
+                            Quantity = a.Quantity,
+                            CategoryName = b.Name,
+                            Detail = a.Detail,
+                            CreatedDate = a.CreatedDate,
+                            CreatedBy = a.CreatedBy,
+                            ModifiedDate = a.ModifiedDate,
+                            ModifiedBy = a.ModifiedBy,
+                            MetaKeywords = a.MetaKeywords,
+                            MetaDescriptions = a.MetaDescriptions,
+                            Status = a.Status,
+                            TopHot = a.TopHot,
+                            ViewCount = a.ViewCount
+                        };
+            return model.ToList();
+        }
+
+        //Lấy danh sách những cuốn sách thuộc tophot
+        public List<BooksViewModel> TopHotForClient()
+        {
+            var model = from a in db.Books
+                        join b in db.BookCategories
+                        on a.CategoryID equals b.ID
+                        where a.CategoryID == b.ID && a.TopHot == true && a.Status == true
+                        select new BooksViewModel()
+                        {
+                            ID = a.ID,
+                            Name = a.Name,
+                            Author = a.Author,
+                            publisher = a.publisher,
+                            MetaTitle = a.MetaTitle,
+                            Description = a.Description,
+                            Image = a.Image,
+                            Price = a.Price,
+                            PromotionPrice = a.PromotionPrice,
+                            IncludedVAT = a.IncludedVAT,
+                            Quantity = a.Quantity,
+                            CategoryName = b.Name,
+                            Detail = a.Detail,
+                            CreatedDate = a.CreatedDate,
+                            CreatedBy = a.CreatedBy,
+                            ModifiedDate = a.ModifiedDate,
+                            ModifiedBy = a.ModifiedBy,
+                            MetaKeywords = a.MetaKeywords,
+                            MetaDescriptions = a.MetaDescriptions,
+                            Status = a.Status,
+                            TopHot = a.TopHot,
+                            ViewCount = a.ViewCount
+                        };
+            return model.ToList();
+        }
+
+        //Lấy danh sách sách mới, số lượng theo quality
+        public List<BooksViewModel> ListNewBooks(int quality) {
+            var model = from a in db.Books
+                        join b in db.BookCategories
+                        on a.CategoryID equals b.ID
+                        where a.CategoryID == b.ID &&  a.Status == true
+                        orderby a.CreatedDate descending
+                        select new BooksViewModel()
+                        {
+                            ID = a.ID,
+                            Name = a.Name,
+                            Author = a.Author,
+                            publisher = a.publisher,
+                            MetaTitle = a.MetaTitle,
+                            Description = a.Description,
+                            Image = a.Image,
+                            Price = a.Price,
+                            PromotionPrice = a.PromotionPrice,
+                            IncludedVAT = a.IncludedVAT,
+                            Quantity = a.Quantity,
+                            CategoryName = b.Name,
+                            Detail = a.Detail,
+                            CreatedDate = a.CreatedDate,
+                            CreatedBy = a.CreatedBy,
+                            ModifiedDate = a.ModifiedDate,
+                            ModifiedBy = a.ModifiedBy,
+                            MetaKeywords = a.MetaKeywords,
+                            MetaDescriptions = a.MetaDescriptions,
+                            Status = a.Status,
+                            TopHot = a.TopHot,
+                            ViewCount = a.ViewCount
+                        };
+            return model.Take(quality).ToList();
+        }
+
+        //Lấy ra viewcount của 1 book dựa vào ID
+        public int currentViewcount(long id)
+        {
+            int result = 0;
+            var entity = db.Books.Find(id);
+            if (entity.ViewCount.HasValue)
+            {
+                result = (int)entity.ViewCount;
+            }
+            return result;
+        }
+
+        //Lấy ra danh sách sách được xem nhiều, số lượng theo quanlity truyền vào
+        public List<BooksViewModel> BestPreviewBooks(int quanlity) {
+            var model = from a in db.Books
+                        join b in db.BookCategories
+                        on a.CategoryID equals b.ID
+                        where a.CategoryID == b.ID && a.Status == true && a.ViewCount.HasValue
+                        orderby a.ViewCount descending
+                        select new BooksViewModel()
+                        {
+                            ID = a.ID,
+                            Name = a.Name,
+                            Author = a.Author,
+                            publisher = a.publisher,
+                            MetaTitle = a.MetaTitle,
+                            Description = a.Description,
+                            Image = a.Image,
+                            Price = a.Price,
+                            PromotionPrice = a.PromotionPrice,
+                            IncludedVAT = a.IncludedVAT,
+                            Quantity = a.Quantity,
+                            CategoryName = b.Name,
+                            Detail = a.Detail,
+                            CreatedDate = a.CreatedDate,
+                            CreatedBy = a.CreatedBy,
+                            ModifiedDate = a.ModifiedDate,
+                            ModifiedBy = a.ModifiedBy,
+                            MetaKeywords = a.MetaKeywords,
+                            MetaDescriptions = a.MetaDescriptions,
+                            Status = a.Status,
+                            TopHot = a.TopHot,
+                            ViewCount = a.ViewCount
+                        };
+            return model.Take(quanlity).ToList();
+        }
+
+        //Lấy ra những sách nào thuộc BookCategory đang có ShowOnHome là true để đưa lên trang Index của BooksController
+        public List<BooksViewModel> ListBooksShowOnHome() {
+            var model = from a in db.Books
+                        join b in db.BookCategories
+                        on a.CategoryID equals b.ID
+                        where a.CategoryID == b.ID && a.Status == true && b.ShowOnHome==true
+                        orderby a.ViewCount descending
+                        select new BooksViewModel()
+                        {
+                            ID = a.ID,
+                            Name = a.Name,
+                            Author = a.Author,
+                            publisher = a.publisher,
+                            MetaTitle = a.MetaTitle,
+                            Description = a.Description,
+                            Image = a.Image,
+                            Price = a.Price,
+                            PromotionPrice = a.PromotionPrice,
+                            IncludedVAT = a.IncludedVAT,
+                            Quantity = a.Quantity,
+                            CategoryName = b.Name,
+                            Detail = a.Detail,
+                            CreatedDate = a.CreatedDate,
+                            CreatedBy = a.CreatedBy,
+                            ModifiedDate = a.ModifiedDate,
+                            ModifiedBy = a.ModifiedBy,
+                            MetaKeywords = a.MetaKeywords,
+                            MetaDescriptions = a.MetaDescriptions,
+                            Status = a.Status,
+                            TopHot = a.TopHot,
+                            ViewCount = a.ViewCount
+                        };
+            return model.ToList();
         }
 
         //Kiem tra su ton tai cua 1 sách dùng cho Create
@@ -43,8 +264,9 @@ namespace Models.DAO
 
 
         //Kiểm tra sự tồn tại của 1 sách dùng cho Update
-        public bool bookExistForUpdate(string bookName, long id) {
-            var result = db.Books.SingleOrDefault(x => x.Name == bookName && x.ID!=id);
+        public bool bookExistForUpdate(string bookName, long id)
+        {
+            var result = db.Books.SingleOrDefault(x => x.Name == bookName && x.ID != id);
             if (result == null)
             {
                 return false;
@@ -121,6 +343,22 @@ namespace Models.DAO
             }
         }
 
+        //Update viewcount
+        public bool UpdateBookViewcount(Book entity)
+        {
+            try
+            {
+                var model = db.Books.Find(entity.ID);
+                model.ViewCount = entity.ViewCount;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         //Phương thức này sử dụng cho ajax
         public bool ChangeStatus(long id)
         {
@@ -159,9 +397,14 @@ namespace Models.DAO
         }
 
         //Lấy ra tin TopHot hiển thị ra Client
-        public Book TopHotForClient()
-        {
-            return db.Books.SingleOrDefault(x => x.TopHot == true);
-        }
+        //public Book TopHotForClient()
+        //{
+        //    return db.Books.SingleOrDefault(x => x.TopHot == true);
+        //}
+
+        
+
+        
+
     }
 }

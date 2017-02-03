@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scriptNest{
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').DataTable({
+                responsive: true,
+                "lengthMenu": [[5, 10, 15, 20, 25, 50, -1], [5, 10, 15, 20, 25, 50, "Tất cả"]],
+                "language": {
+                    "lengthMenu": "Hiển thị _MENU_ sự kiện"
+                }
+            });
+        });
+    </script>
+}
+
+
+<div class="three-space"></div>
+<div class="l-event">
+    <div class="container">
+        <div id="Event_Index_client">
+            @{Html.RenderAction("Eventslider", "Events"); }
+
+        </div>
+
+
+        <div class="three-space"></div>
+        <div class="layer-col">
+            <div class="row row-25">
+                <div class="col-sm-8 col-right">
+                    <div class="headline">
+                        <div class="row row-0">
+                            <div class="col-sm-4">
+                                <h2>Các sự kiện</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-event">
+                        <!--Nội dung của sự kiện săp dien ra-->
+                        @{Html.RenderAction("NextToEvents", "Events"); }
+
+                        <!--./Nội dung của sự kiện săp dien ra-->
+
+                    </div>
+                    <div class="two-space"></div>
+                </div>
+
+                <!--Nội dung cột bên phải-->
+                <div class="col-sm-4 col-left">
+                    @RenderPage("rightsidebar.cshtml")
+                </div>
+                <!--./Nội dung cột bên phải-->
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Models.EF.Author>
+
+<ul class="ls-none">
+    @foreach (var item in Model)
+    {
+        var url = "/tac-gia/" + item.MetaTitle + "-" + item.ID;
+        <li>
+            <a href="@url" title="@item.Name" data-id="@item.ID">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                @item.Name
+            </a>
+        </li>
+    }
+</ul>
+
+

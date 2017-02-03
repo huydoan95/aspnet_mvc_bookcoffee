@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Models.EF._event>
+@{
+    <link rel="stylesheet" href="/Assets/Client/styles/libs/bootstrap.min.css" />
+    <script src="~/Assets/galleryslider/js/jssor.slider-21.1.6.mini.js"></script>
+    
+
+}
+
+@*<div id="jssor_1" class="col-md-12" style="position: relative; margin: 0 auto; top: 0px; left: 0px;  height: 456px; overflow: hidden; visibility: hidden; ">
+    <!-- Loading Screen -->
+    <div data-u="slides" class="col-md-12" style="cursor: default; position: relative; top: 0px; left: 0px;   height: 456px; overflow: hidden;">
+        @foreach (var item in Model)
+        {
+            
+            <div class="item bg" style="background-image: url(@item.Image)">
+                <div class="text-event-slider color-white text-left">
+                    <h2 class="text-center">
+                        @item.Name <br>
+                        <span>@item.StartTime ~ @item.EndTime ngày @item.EventDate</span>
+                    </h2>
+                    <p>
+                        <strong><a href="#" title="Nội dung:">Tóm tắt:</a></strong>
+                        @Html.Raw(item.Description)
+                    </p>
+                    <p>
+                        <a href="@url" class="readmore" title="Xem chi tiết">Xem chi tiết</a>
+                    </p>
+
+                </div>
+            </div>
+        }
+    </div>
+    <!--Arrow Navigator -->
+    <span data-u="arrowleft" class="jssora05l" style="top:158px;left:8px;width:40px;height:40px;"></span>
+    <span data-u="arrowright" class="jssora05r" style="top:158px;right:8px;width:40px;height:40px;"></span>
+</div>*@
+
+<div class="slider-event single-item text-right">
+    @foreach (var item in Model)
+    {
+        var url = "/view-su-kien/" + item.MetaTitle + "-" + item.ID;
+        <div class="item bg" style="background-image: url(@item.Image)">
+            <div class="text-event-slider color-white text-left">
+                <h2 class="text-center">
+                    @item.Name <br>
+                    <span>@(item.StartTime != null ? item.StartTime : "null")
+                         ~ 
+                        @(item.EndTime != null ? item.EndTime : "null")
+                         ngày 
+                        @(item.EventDate != null ? item.EventDate.Value.ToString("dd-MM-yyyy") : "null")</span>
+                </h2>
+                <p>
+                    <strong><a href="#" title="Nội dung:">Tóm tắt:</a></strong>
+                    @Html.Raw(item.Description)
+                </p>
+                
+                <p>
+                    <a href="@url" class="readmore" title="Xem chi tiết">Xem chi tiết</a>
+                </p>
+
+            </div>
+        </div>
+    }
+    
+</div>

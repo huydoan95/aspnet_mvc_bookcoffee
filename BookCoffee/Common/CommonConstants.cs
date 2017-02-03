@@ -8,5 +8,6 @@ namespace BookCoffee.Common
     public static class CommonConstants
     {
         public const string USER_SESSION = "USER_SESSION";
+        public static string FIRSTLOAD_SESSION = "FIRSTLOAD_SESSION";
     }
 }

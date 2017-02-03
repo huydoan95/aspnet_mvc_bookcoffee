@@ -10,17 +10,22 @@
     <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,800" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- plugin css -->
-    <link rel="stylesheet" href="~/Assets/Client/assets/styles/libs/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/Assets/Client/assets/styles/libs/slick.css" />
-    <link rel="stylesheet" href="~/Assets/Client/assets/styles/libs/slick-theme.css" />
-    <link rel="stylesheet" href="~/Assets/Client/assets/styles/libs/colorbox.css" />
-    <link rel="stylesheet" href="~/Assets/Client/assets/styles/libs/font-awesome.css" />
-    <link rel="stylesheet" href="~/Assets/Client/assets/styles/libs/nivo-slider.css" />
+    <link rel="stylesheet" href="/Assets/Client/styles/libs/bootstrap.min.css" />
+    <link rel="stylesheet" href="/Assets/Client/styles/libs/slick.css" />
+    <link rel="stylesheet" href="/Assets/Client/styles/libs/slick-theme.css" />
+    <link rel="stylesheet" href="/Assets/Client/styles/libs/colorbox.css" />
+    <link rel="stylesheet" href="/Assets/Client/styles/libs/font-awesome.css" />
+    <link rel="stylesheet" href="/Assets/Client/styles/libs/nivo-slider.css" />
+
+    <!--DatePicker-->
+    <link href="~/Assets/Admin/JQueryDatePicker/jquery-ui.css" rel="stylesheet" />
+    <!--./-->
 
     <!-- main css site -->
-    <link rel="stylesheet" href="~/Assets/Client/assets/styles/main.css">
-
+    @*<link rel="stylesheet" href="~/Assets/Client/assets/styles/main.css">*@
+    <link rel="stylesheet" href="/Assets/Client/styles/main.css" />
 </head>
 <body>
     <div class="wrapper">
@@ -28,48 +33,54 @@
             @RenderPage("_Header.cshtml")
         </header>
 
+
         <main id="main-content">
-            @RenderBody()
+                @RenderBody()
         </main>
 
         <footer id="footer" class="bg-pink color-white">
             @RenderPage("_Footer.cshtml")
         </footer>
+
     </div>
     <!-- PLUGIN JS -->
-    <script src="~/Assets/Client/assets/scripts/libs/jquery.min.js"></script>
-    <script src="~/Assets/Client/assets/scripts/libs/bootstrap.min.js"></script>
-    <script src="~/Assets/Client/assets/scripts/libs/slick.min.js"></script>
-    <script src="~/Assets/Client/assets/scripts/libs/jquery.colorbox.min.js"></script>
-    <script src="~/Assets/Client/assets/scripts/libs/jquery.nivo.slider.js"></script>
+    <script src="/Assets/Client/scripts/libs/jquery.min.js"></script>
+    <script src="/Assets/Client/scripts/libs/bootstrap.min.js"></script>
+    <script src="/Assets/Client/scripts/libs/slick.min.js"></script>
+    <script src="/Assets/Client/scripts/libs/jquery.colorbox.min.js"></script>
+    <script src="/Assets/Client/scripts/libs/jquery.nivo.slider.js"></script>
+    <script src="/Assets/Client/scripts/libs/isotope.pkgd.min.js"></script>
+
+    <script src="~/Assets/gistfile1.js"></script>
+
+    <!--Datepicker-->
+    <script src="~/Assets/Admin/JQueryDatePicker/jquery-ui.js"></script>
+
+    <!-- DataTables JavaScript -->
+    <script src="~/Assets/Admin/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/Assets/Admin/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
 
     <!-- main js site-->
-    <script src="~/Assets/Client/assets/scripts/main.js"></script>
+    <script src="/Assets/Client/scripts/main.js"></script>
 
     <!-- call slider  -->
     <script type="text/javascript">
         $(window).load(function () {
             $('#slider-nivo').nivoSlider();
             $('#slider2').nivoSlider();
-
-            //Tạm thời không dùng chức năng này
-            //$('.item .thumnail').click( function (e) {
-            //    e.preventDefault();
-            //    //Lấy giá trị từ nơi được chọn
-            //    var id = $(this).find('.box-img a').data('id');
-            //    var href = $(this).find('.box-img a[data-id=' + id + ']').attr('href');
-            //    var src = $(this).find('.box-img a[data-id=' + id + '] img').attr('src');
-            //    var content = $(this).find('.box-text h3 a[data-id=' + id + ']').text();
-
-            //    //gán lên phía trên
-            //    $('.theme-default.dots-none .title-news h3 a').text(content);
-            //    $('.theme-default.dots-none .title-news h3 a').attr('href', href);
-            //    $('.theme-default.dots-none .title-news h3 a').attr('title', content);
-
-            //    $('.theme-default.dots-none #slider-nivo.nivoSlider a').attr('href', href);
-            //    $('.theme-default.dots-none #slider-nivo.nivoSlider img').attr('src', src);
-            //});
         });
     </script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+        $(function () {
+            $("#datepicker2").datepicker();
+        });
+    </script>
+   
 </body>
 </html>
+@RenderSection("scriptNest", required: false)

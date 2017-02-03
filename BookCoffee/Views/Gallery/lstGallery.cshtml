@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Models.EF.ImageGallery>
+<div class="row row-8">
+    <ul class="ls-none isotope-images isotope-images-col">
+        @foreach (var item in Model)
+        {
+            string url = "khong_gian" + item.MetaTitle + "-" + item.ID;
+            <li class="col-md-4 col-sm-6 isotope-item element image" data-category="image">
+                <div class="thumnail-gallary">
+                    <a href="@url" title="@item.Name">
+                        <img src="@item.ImagePath" alt="@item.Name" class="square_images">
+                    </a>
+                </div>
+            </li>
+        }
+    </ul>
+</div>

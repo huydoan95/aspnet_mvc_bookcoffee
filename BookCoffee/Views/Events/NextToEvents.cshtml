@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Models.EF._event>
+@{
+    
+}
+<table width="100%" id="dataTables-example">
+    <thead>
+        <tr>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var url = "/view-su-kien/" + item.MetaTitle + "-" + item.ID;
+            var RegisterUrl = "/dang-ky-su-kien/" + item.MetaTitle + "-" + item.ID;
+            <tr data-category="image">
+                <td>
+                    <article>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="thumnail-event-img ps-rv">
+                                    <div class="box-img">
+                                        <img src="@item.Image" alt="">
+                                    </div>
+                                    <div class="box-text text-center ps-as">
+                                        <div class="group-day table-div">
+                                            <div class="table-cell">
+                                                @*<span class="day">CN</span>
+                                                    <span class="days">16</span>
+                                                    <span class="mouth">TH2</span>*@
+                                                <span class="day">@(item.EventDate != null ? item.EventDate.Value.ToString("dd") : "null")</span>
+                                                <span class="days">@(item.EventDate != null ? item.EventDate.Value.ToString("MM") : "null")</span>
+                                                <span class="mouth"> @(item.EventDate != null ? item.EventDate.Value.ToString("yyyy") : "null")</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="thumnail-event-text">
+                                    <h3><a href="@url" title="@item.Name">@item.Name</a></h3>
+                                    <div class="date-event">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i> @(item.EventDate != null ? item.EventDate.Value.ToString("dd-MM-yyyy") : "null")
+                                        <span>|</span>
+                                        <a href="@RegisterUrl" title="Đăng ký" class="btn-blue">Đăng ký</a>
+                                    </div>
+                                    <p>
+                                        @Html.Raw(item.Description)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

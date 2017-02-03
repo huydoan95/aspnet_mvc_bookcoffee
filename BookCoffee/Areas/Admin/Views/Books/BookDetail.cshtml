@@ -29,7 +29,7 @@
                     <tbody>
                         <tr>
                             <td><img src="@Html.DisplayFor(model => model.Image)" style="width:150px;height:150px;" /></td>
-                            <td>@Html.DisplayFor(model => model.Description)</td>
+                            <td>@Html.Raw(Model.Description)</td>
                             <th>@Html.DisplayFor(model => model.Author)</th>
                             <th>@Html.DisplayFor(model => model.publisher)</th>
                             <td>@Html.DisplayFor(model => model.CreatedBy)</td>

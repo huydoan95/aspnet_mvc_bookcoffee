@@ -39,46 +39,18 @@ namespace BookCoffee.Areas.Admin.Controllers
                 bool exits = dao.LawCornerExist(model.Name);
                 if (!exits)
                 {
-                    //Nếu chọn tin này là TopHot
-                    if (model.TopHot == true)
+                    string metatitle = CastString.Cast(model.Name);
+                    model.MetaTitle = metatitle;
+                    model.CreatedDate = DateTime.Now;
+                    bool result = dao.CreateLawCorner(model);
+                    if (result)
                     {
-                        bool TopHot = dao.TopHotForCreate();
-                        if (!TopHot)
-                        {
-                            string metatitle = CastString.Cast(model.Name);
-                            model.MetaTitle = metatitle;
-                            model.CreatedDate = DateTime.Now;
-                            bool result = dao.CreateLawCorner(model);
-                            if (result)
-                            {
-                                SetAltert("Tạo tin  thành công", 0);
-                                return RedirectToAction("Index", "LawCorner");
-                            }
-                            else
-                            {
-                                SetAltert("Tạo mới không thành công", 2);
-                            }
-                        }
-                        else
-                        {
-                            SetAltert("Tạm thời không thể thiết lập TopHot cho ti này, vì hiện đang có 1 tin thuộc TopHot", 2);
-                        }
+                        SetAltert("Tạo tin  thành công", 0);
+                        return RedirectToAction("Index", "LawCorner");
                     }
                     else
                     {
-                        string metatitle = CastString.Cast(model.Name);
-                        model.MetaTitle = metatitle;
-                        model.CreatedDate = DateTime.Now;
-                        bool result = dao.CreateLawCorner(model);
-                        if (result)
-                        {
-                            SetAltert("Tạo mới tin thành công", 0);
-                            return RedirectToAction("Index", "LawCorner");
-                        }
-                        else
-                        {
-                            SetAltert("Tạo mới không thành công", 2);
-                        }
+                        SetAltert("Tạo mới không thành công", 2);
                     }
                 }
                 else
@@ -120,47 +92,18 @@ namespace BookCoffee.Areas.Admin.Controllers
                 bool exist = dao.LawCornerExistForUpdate(model.Name, model.ID);
                 if (!exist)
                 {
-                    //Trường hợp chọn sách là Tophot
-                    if (model.TopHot == true)
+                    string metatitle = CastString.Cast(model.Name);
+                    model.MetaTitle = metatitle;
+                    bool result = dao.UpdateLawCorner(model);
+                    if (result)
                     {
-                        bool tophot = dao.TopHotForUpdate(model.ID);
-                        //Kiểm tra xem hiện tại đang có sách nào thuộc TopHot chưa
-                        if (!tophot)
-                        {
-                            string metatitle = CastString.Cast(model.Name);
-                            model.MetaTitle = metatitle;
-                            bool result = dao.UpdateLawCorner(model);
-                            if (result)
-                            {
-                                SetAltert("Cập nhật thành công", 0);
-                                return RedirectToAction("Index", "LawCorner");
-                            }
-                            else
-                            {
-                                SetAltert("Cập nhật không thành công", 2);
-                            }
-                        }
-                        else
-                        {
-                            SetAltert("Tạm thời không thể thiết lập TopHot cho tin này, vì hiện đang có 1 tin thuộc TopHot", 2);
-                        }
+                        SetAltert("Cập nhật thành công", 0);
+                        return RedirectToAction("Index", "LawCorner");
                     }
                     else
                     {
-                        string metatitle = CastString.Cast(model.Name);
-                        model.MetaTitle = metatitle;
-                        bool result = dao.UpdateLawCorner(model);
-                        if (result)
-                        {
-                            SetAltert("Cập nhật thành công", 0);
-                            return RedirectToAction("Index", "LawCorner");
-                        }
-                        else
-                        {
-                            SetAltert("Cập nhật không thành công", 2);
-                        }
+                        SetAltert("Cập nhật không thành công", 2);
                     }
-
                 }
                 else
                 {

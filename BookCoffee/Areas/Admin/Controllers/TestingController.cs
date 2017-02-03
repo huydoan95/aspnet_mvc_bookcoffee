@@ -13,5 +13,8 @@ namespace BookCoffee.Areas.Admin.Controllers
         {
             return View();
         }
+        public ActionResult galleryslider() {
+            return View();
+        }
     }
 }

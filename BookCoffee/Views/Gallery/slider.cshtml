@@ -1,0 +1,14 @@
+﻿@model BookCoffee.Areas.Admin.Models.EachGalleryImages
+
+@if (Model.images != null)
+{
+    foreach (var image in Model.images)
+    {
+        string url = "khong_gian" + Model.MetaTitle + "-" + Model.ID;
+        <div class="item">
+            <a href="@url">
+                <img src="@image" alt="" class="slider_images">
+            </a>
+        </div>
+    }
+}

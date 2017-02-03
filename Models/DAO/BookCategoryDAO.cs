@@ -22,7 +22,7 @@ namespace Models.DAO
             return db.BookCategories.OrderByDescending(x=>x.Status).ToList();
         }
 
-        //Lấy ra danh sách loại sách dùng cho Admin
+        //Lấy ra danh sách loại sách dùng cho Client
         public List<BookCategory> listBookCategoryClient()
         {
             return db.BookCategories.Where(x => x.Status==true).ToList();
@@ -125,6 +125,11 @@ namespace Models.DAO
             bookCategory.Status = !bookCategory.Status;
             db.SaveChanges();
             return bookCategory.Status;
+        }
+
+        //Lấy ra loại sách thuôc Show On Home
+        public BookCategory BookCategoryShowOnHome() {
+            return db.BookCategories.SingleOrDefault(x => x.ShowOnHome == true);
         }
     }
 }

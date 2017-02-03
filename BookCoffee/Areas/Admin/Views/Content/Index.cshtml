@@ -39,8 +39,8 @@
                                 <tr id="row_@item.ID">
                                     <td>@i</td>
                                     <td>@item.Name</td>
-                                    <td style="width:50%">@item.Description</td>
-                                    <td>@item.CreatedDate</td>
+                                    <td style="width:50%">@Html.Raw(item.Description)</td>
+                                    <td style="width:10%">@item.CreatedDate</td>
                                     <td style="width:18%">
                                         <i class="fa fa-info" aria-hidden="true"></i>
                                         <a href="/Admin/Content/ContentDetail/@item.ID">Chi tiết</a>

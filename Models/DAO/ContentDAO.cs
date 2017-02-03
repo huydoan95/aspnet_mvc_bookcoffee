@@ -32,6 +32,12 @@ namespace Models.DAO
             return db.Contents.Where(x => x.Status == true).OrderByDescending(x => x.CreatedDate).Take(6).ToList();
         }
 
+        //Lấy ra tin TopHot hiển thị ra Client
+        public Content TopHotConten()
+        {
+            return db.Contents.SingleOrDefault(x => x.TopHot == true);
+        }
+
         //Thêm mới tin tức
         public long CreateContent(Content entity)
         {
@@ -121,9 +127,6 @@ namespace Models.DAO
             }
         }
 
-        //Lấy ra tin TopHot hiển thị ra Client
-        public Content TopHotConten() {
-            return db.Contents.SingleOrDefault(x => x.TopHot == true);
-        }
+     
     }
 }

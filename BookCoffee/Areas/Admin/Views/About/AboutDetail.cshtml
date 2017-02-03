@@ -1,0 +1,53 @@
+﻿@model Models.EF.About
+
+@{
+    ViewBag.Title = "AboutDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layouts.cshtml";
+}
+@section header{}
+<div class="col-md-12">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h4>@Html.DisplayNameFor(model => model.Name) :@Html.DisplayFor(model => model.Name)</h4>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Image)</th>
+                            <th>@Html.DisplayNameFor(model => model.Description)</th>
+                            
+                        </tr>
+                       
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <img src="@Html.DisplayFor(model => model.Image)" width="200px;" height="200px;" />
+
+                            </td>
+                            <td>@Html.Raw(Model.Description)</td>
+                           
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="font-size:15px;">@Html.Raw(Model.Detail)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+        <!--/. panel-body-->
+        <div class="panel-footer">
+            <div class="btn btn-outline btn-success">@Html.ActionLink("Quay lại", "Index", null, null)</div>
+            <div class="btn btn-outline btn-success">@Html.ActionLink("Cập nhật", "UpdateAbout", "About", new { id = Model.ID }, null)</div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

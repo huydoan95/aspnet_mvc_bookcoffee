@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Models.EF._event>
+<div class="list-image-event">
+    <div class="row row-8">
+        @foreach (var item in Model)
+        {
+            var url = "/view-su-kien/" + item.MetaTitle + "-" + item.ID;
+            <div class="col-xs-4">
+                <a href="@url" title="@item.Name">
+                    @if (item.Image != null)
+                    {
+                        <img src="@item.Image" class="fullwidth" alt="@item.Name">
+                    }
+
+                </a>
+            </div>
+        }
+    </div>
+</div>

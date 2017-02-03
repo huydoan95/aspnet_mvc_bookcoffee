@@ -1,0 +1,134 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="three-space"></div>
+<div class="l-product">
+    <div class="container">
+        <!--Slider-->
+        <div id="client_index">
+            @{Html.RenderAction("loadImages", "product");}
+        </div>
+        <!--./Slider-->
+        <!--3 sản phẩm dưới slider-->
+        <div class="three-product">
+            @{Html.RenderAction("threeTophotProduct", "Product"); }
+        </div>
+        <!--./3 sản phẩm dưới slider-->
+
+        <div class="layer-col">
+            <div class="row row-25">
+                <div class="col-sm-4 col-left">
+                    <div class="l-sidebar">
+                        <div class="mod-sidebar">
+
+                            <!--Search theo tên thực đơn-->
+                            <div class="header-siderbar bg-pink">
+                                <h4>Tìm theo</h4>
+                            </div>
+                            <div class="box-sidebar">
+                                <h3 class="text-center">
+                                    Tên thực đơn
+                                </h3>
+                                <div class="mod-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" aria-describedby="basic-addon2">
+                                        <span class="input-group-addon btn-search" id="basic-addon2"><a href="#" title="Search"><i class="fa fa-search" aria-hidden="true"></i></a></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--./Search theo tên thực đơn-->
+                            <!--Searh theo giá sản phẩm-->
+                            <div class="header-siderbar bg-pink">
+                                <h4>Tìm theo</h4>
+                            </div>
+                            <div class="box-sidebar">
+                                <h3 class="text-center">
+                                    giá tiền
+                                </h3>
+                                <div class="row row-8 select-price">
+                                    <div class="col-xs-5">
+                                        <div class="form-group">
+                                            <select class="selectpicker">
+                                                <option value="0">20,000 VND</option>
+                                                <option value="1">23,000 VND</option>
+                                                <option value="2">25,000 VND</option>
+                                                <option value="3">27,000 VND</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-5">
+                                        <div class="form-group bg-left">
+                                            <select class="selectpicker">
+                                                <option value="0">20,000 VND</option>
+                                                <option value="1">23,000 VND</option>
+                                                <option value="2">25,000 VND</option>
+                                                <option value="3">27,000 VND</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <span class="btn-search"><a href="#" title="Search"><i class="fa fa-search" aria-hidden="true"></i></a></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--./Searh theo giá sản phẩm-->
+                            <!--Menu các loại thực đơn-->
+                            @{Html.RenderAction("menuProdCategory", "Product"); }
+                            <!--./Menu các loại thực đơn-->
+                            <!--Menu Product theo ProductCategoty-->
+                            <div class="MnuProdByCate">
+                                @{Html.RenderAction("ProductByCategory", "Product"); }
+                            </div>
+                            <!--./Menu Product theo ProductCategoty-->
+
+                        </div><!--End mod-sidebar-->
+                    </div><!--End l-sidebar-->
+                </div>
+
+                <div class="col-sm-8 col-right">
+                    <!--Danh sách sản phẩm có ProductCategory showonhome-->
+                    @{Html.RenderAction("productsOfProdCateShowOnHome", "Product"); }
+                    <!--./Danh sách sản phẩm có ProductCategory showonhome-->
+                    <!--Thực đơn món mới-->
+                    @{Html.RenderAction("lstNewProducts", "Product"); }
+                    <!--./Thực đơn món mới-->
+                    <!--Thực đơn được yêu thích-->
+                    @{Html.RenderAction("BestPreviewProduct", "Product"); }
+                    <!--./Thực đơn được yêu thích-->
+
+                    <div class="three-space"></div>
+                    <div class="lead-product bg" style="background-image: url(assets/images/img10.jpg)">
+                        <div class="box-lead text-center color-white">
+                            <h2>Khoai Tây chiên</h2>
+                            <h4 class="price">35.00vnd</h4>
+                        </div>
+                    </div>
+                    <div class="three-space"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scriptNest{
+    <!-- DataTables JavaScript -->
+    <script src="~/Assets/Admin/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/Assets/Admin/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="~/Assets/Admin/js/ProductController.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').DataTable({
+                responsive: true,
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tất cả"]],
+                "language": {
+                    "lengthMenu": "Hiển thị _MENU_ Món"
+                }
+            });
+        });
+    </script>
+}

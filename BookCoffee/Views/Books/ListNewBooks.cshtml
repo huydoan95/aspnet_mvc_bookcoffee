@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Models.ViewModels.BooksViewModel>
+<div class="l-list-book">
+    <div class="headline"></div>
+    <h2>Sách Mới</h2>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            var urlBook = "/sach/" + item.MetaTitle + "-" + item.ID;
+            <div class="col-sm-3">
+                <div class="thumnail-book-v2 ps-rv">
+                    <div class="box-img">
+                        <img src="@item.Image" alt="@item.Name" class="square_images">
+                    </div>
+                    <div class="box-text">
+                        <div class="table-div">
+                            <div class="table-cell">
+                                <h3>@item.Name</h3>
+                                <a href="@urlBook" title="Chi tiết" class="btn btn-border">Chi tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

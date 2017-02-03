@@ -1,0 +1,156 @@
+﻿@model IEnumerable<Models.ViewModels.BooksViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scriptNest{
+    <!-- DataTables JavaScript -->
+    <script src="~/Assets/Admin/vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/Assets/Admin/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="~/Assets/Admin/js/BookController.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').DataTable({
+                responsive: true,
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tất cả"]],
+                "language": {
+                    "lengthMenu": "Hiển thị _MENU_ Sách"
+                }
+            });
+        });
+    </script>
+
+}
+<div class="three-space"></div>
+<div class="l-book layer-col" id="book_client_index">
+    <div class="container">
+        <div class="row row-25">
+            <div class="col-sm-4 col-left">
+                <div class="l-sidebar">
+                    <div class="mod-sidebar">
+                        <div class="header-siderbar bg-pink">
+                            <h4>Thể loại sách</h4>
+                        </div>
+                        <!--Menu danh sách Thể loại sách-->
+                        <div class="box-sidebar">
+                            @{Html.RenderAction("MenuBookCategory", "Books"); }
+                        </div>
+                        <!--./Menu danh sách Thể loại sách-->
+                        <!--Menu Nhà xuất bản-->
+                        <div class="header-siderbar bg-pink">
+                            <h3>
+                                nhà xuất bản
+                            </h3>
+                        </div>
+                        <div class="box-sidebar">
+                            @{ Html.RenderAction("MenuPublisher", "Books");}
+                        </div>
+                        <!--./Menu Nhà xuất bản-->
+                        <!--Menu Tác Giả-->
+                        <div class="header-siderbar bg-pink">
+                            <h3>
+                                tác giả
+                            </h3>
+                        </div>
+                        <div class="box-sidebar">
+                            @{ Html.RenderAction("MenuAuthor", "Books");}
+                        </div>
+                        <!--./Menu Tác Giả-->
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-8 col-right">
+                <!--Section Slider-->
+                @{Html.RenderAction("SliderTopHotBooks", "Books"); }
+                <!--./Section Slider-->
+
+                <!--Section sách văn học nước ngòai-->
+                <div class="l-list-book">
+                    <div class="headline">
+                        <div class="row row-0">
+                            <div class="col-sm-10">
+                                <h2>@ViewBag.BookCategoryName</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- begin isotope-images -->
+                        <table width="100%" id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    var urlBook1 = "/sach/" + item.MetaTitle + "-" + item.ID;
+                                    <tr class="col-sm-3 isotope-item element image front-end" data-category="image">
+                                        <td>
+                                            <div class="isotope">
+                                                <div class="thumnail-book-v2 ps-rv">
+                                                    <div class="box-img">
+                                                        <img src="@item.Image" alt="@item.Name" class="square_images" />
+                                                    </div>
+                                                    <div class="box-text">
+                                                        <div class="table-div">
+                                                            <div class="table-cell">
+                                                                <h4>@item.Name</h4>
+                                                                <a href="@urlBook1" title="Chi tiết" class="btn btn-border">Chi tiết</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                }
+
+                            </tbody>
+                        </table>
+                        <!-- end isotope-images -->
+                    </div>
+                    @*<nav aria-label="Page navigation" class="mod-navigation">
+                            <label for="">Hiển thị</label>
+                            <select class="selectpicker">
+                                <option value="0">10</option>
+                                <option value="1">9</option>
+                                <option value="1">8</option>
+                                <option value="1">7</option>
+                            </select>
+                            <ul class="pagination">
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">6</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>*@
+                </div>
+                <!--./Section sách văn học nước ngòai-->
+
+                <!--Section Sách mới-->
+                @{Html.RenderAction("ListNewBooks", "Books"); }
+                <!--./Section Sách mới-->
+
+                <!--Section sách được xem nhiều-->
+                @{Html.RenderAction("BestPreviewBooks", "Books"); }
+                <!--./Section sách được xem nhiều-->
+
+                <div class="five-space"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

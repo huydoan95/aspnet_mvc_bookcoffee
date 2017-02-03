@@ -16,11 +16,29 @@ namespace Models.DAO
             db = new BookCoffeeShopDbContext();
         }
 
-        //Lấy ra danh sách loại sản phẩm
+        //Lấy ra danh sách loại sản phẩm cho Admin
         public List<ProductCategory> listProdCategory()
         {
             return db.ProductCategories.ToList();
         }
+
+        //Lấy ra danh sách loại sản phẩm dùng cho client
+        public List<ProductCategory> listProdCateClient() {
+            return db.ProductCategories.Where(x => x.Status == true).OrderBy(x => x.Name).ToList();
+        }
+
+        //lấy ra  loại sản phẩm có ShowOnHome = true để, số lượng theo quanlity
+        /// <summary>
+        /// //lấy ra  loại sản phẩm có ShowOnHome = true để, số lượng theo quanlity
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="quanlity"></param>
+        /// <returns></returns>
+        public ProductCategory ProCategoryShowOnHome() {
+            return db.ProductCategories.SingleOrDefault(x => x.Status == true && x.ShowOnHome == true);
+        }
+
+
 
         //Kiểm tra sự tồn tại của 1 loại sản phẩm trước khi tạo mới
         public bool ProductCategoryExist(string ProductCategoryName) {
